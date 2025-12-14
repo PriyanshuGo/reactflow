@@ -4,15 +4,15 @@ import { TbRobot } from 'react-icons/tb';
 
 export const LLMNode = ({ id, data }) => {
   return (
-    <div className="nowheel w-[280px] rounded-xl border border-indigo-200 bg-white shadow-sm">
+    <div className="node-container nowheel">
       {/* Header */}
-      <div className="rounded-t-xl border-b border-indigo-100 bg-indigo-50 px-3 py-2 flex items-center gap-2">
-        <TbRobot className="text-indigo-600" size={16} />
-        <span className="text-sm font-semibold text-indigo-900">LLM</span>
+      <div className="node-header">
+        <TbRobot className="node-header-icon" size={16} />
+        <span className="node-header-text">LLM</span>
       </div>
 
       {/* Body */}
-      <div className="px-3 py-3">
+      <div className="node-body">
         <p className="text-xs text-gray-600 leading-relaxed">
           This is a LLM.
         </p>
@@ -24,14 +24,14 @@ export const LLMNode = ({ id, data }) => {
         position={Position.Left}
         id={`${id}-system`}
         style={{ top: '33%' }}
-        className="!h-2.5 !w-2.5 !border-0 !bg-indigo-400"
+        className="node-handle"
       />
       <Handle
         type="target"
         position={Position.Left}
         id={`${id}-prompt`}
         style={{ top: '67%' }}
-        className="!h-2.5 !w-2.5 !border-0 !bg-indigo-400"
+        className="node-handle"
       />
 
       {/* Output Handle */}
@@ -39,7 +39,7 @@ export const LLMNode = ({ id, data }) => {
         type="source"
         position={Position.Right}
         id={`${id}-response`}
-        className="!h-2.5 !w-2.5 !border-0 !bg-indigo-400"
+        className="node-handle"
       />
     </div>
   );

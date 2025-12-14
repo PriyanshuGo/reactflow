@@ -14,13 +14,13 @@ export const FormatNode = ({ id, data }) => {
         >
             {/* Format Type */}
             <div>
-                <label className="mb-1 block text-xs font-medium text-gray-700">
+                <label className="node-label">
                     Format Type <span className="text-red-500">*</span>
                 </label>
                 <select
                     value={format}
                     onChange={(e) => setFormat(e.target.value)}
-                    className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-xs text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+                    className="node-input nodrag"
                 >
                     <option value="text">Plain Text</option>
                     <option value="json">JSON</option>
@@ -37,9 +37,9 @@ export const FormatNode = ({ id, data }) => {
                     id={`${id}-pretty`}
                     checked={prettyPrint}
                     onChange={(e) => setPrettyPrint(e.target.checked)}
-                    className="nodrag w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    className="node-checkbox nodrag"
                 />
-                <label htmlFor={`${id}-pretty`} className="text-xs font-medium text-gray-700">
+                <label htmlFor={`${id}-pretty`} className="text-xs font-medium text-gray-700 cursor-pointer">
                     Pretty Print
                 </label>
             </div>

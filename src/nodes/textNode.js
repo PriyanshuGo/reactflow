@@ -51,15 +51,17 @@ export const TextNode = ({ id, data }) => {
 
 
   return (
-    <div className="nowheel w-[280px] rounded-xl border border-indigo-200 bg-white shadow-sm">
+    <div className="node-container nowheel">
       {/* Header */}
-      <div className="rounded-t-xl border-b border-indigo-100 bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-900">
-        Text
+      <div className="node-header">
+        <div className="node-header-text">
+          Text
+        </div>
       </div>
 
       {/* Body */}
-      <div className="px-3 py-3">
-        <label className="mb-1 block text-xs font-medium text-gray-700">
+      <div className="node-body">
+        <label className="node-label">
           Text <span className="text-red-500">*</span>
         </label>
 
@@ -75,7 +77,7 @@ export const TextNode = ({ id, data }) => {
             onMouseDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
             placeholder="Type text here..."
-            className="nodrag w-full resize-none rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300 overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-300 scrollbar-track-transparent"
+            className="node-textarea nodrag scrollbar-thin"
             style={{ fontSize, maxHeight: "160px" }}
           />
         </div>
@@ -86,7 +88,7 @@ export const TextNode = ({ id, data }) => {
         type="source"
         position={Position.Right}
         id={`${id}-output`}
-        className="!h-2.5 !w-2.5 !border-0 !bg-indigo-400"
+        className="node-handle"
       />
     </div>
   );

@@ -7,17 +7,16 @@ export const BaseNode = ({
   children,
 }) => {
   return (
-    <div className="w-[260px] rounded-lg border border-gray-200 bg-white shadow-sm relative">
-
+    <div className="node-container relative">
       {/* Header */}
-      <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100 bg-gray-50 rounded-t-lg">
-        <span className="text-sm font-medium text-gray-800">
+      <div className="node-header justify-between">
+        <span className="node-header-text">
           {title}
         </span>
       </div>
 
       {/* Body */}
-      <div className="px-3 py-3 space-y-3 text-xs text-gray-700">
+      <div className="node-body space-y-3 text-xs text-gray-700">
         {children}
       </div>
 
@@ -28,7 +27,7 @@ export const BaseNode = ({
           type="target"
           position={Position.Left}
           id={input.id}
-          className="!w-2.5 !h-2.5 !bg-gray-400 !border-0"
+          className="node-handle"
           style={{ top: 50 + index * 24 }}
         />
       ))}
@@ -40,7 +39,7 @@ export const BaseNode = ({
           type="source"
           position={Position.Right}
           id={output.id}
-          className="!w-2.5 !h-2.5 !bg-gray-400 !border-0"
+          className="node-handle"
           style={{ top: 50 + index * 24 }}
         />
       ))}

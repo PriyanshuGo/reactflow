@@ -14,13 +14,13 @@ export const SummarizerNode = ({ id, data }) => {
         >
             {/* Summary Length */}
             <div>
-                <label className="mb-1 block text-xs font-medium text-gray-700">
+                <label className="node-label">
                     Summary Length <span className="text-red-500">*</span>
                 </label>
                 <select
                     value={length}
                     onChange={(e) => setLength(e.target.value)}
-                    className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-xs text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+                    className="node-input nodrag"
                 >
                     <option value="short">Short (~50 words)</option>
                     <option value="medium">Medium (~100 words)</option>
@@ -32,14 +32,14 @@ export const SummarizerNode = ({ id, data }) => {
             {/* Max Words (shown when custom) */}
             {length === 'custom' && (
                 <div>
-                    <label className="mb-1 block text-xs font-medium text-gray-700">
+                    <label className="node-label">
                         Max Words
                     </label>
                     <input
                         type="number"
                         value={maxWords}
                         onChange={(e) => setMaxWords(e.target.value)}
-                        className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-xs text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+                        className="node-input nodrag"
                         placeholder="100"
                         min="10"
                     />

@@ -14,13 +14,13 @@ export const TranslatorNode = ({ id, data }) => {
         >
             {/* Source Language */}
             <div>
-                <label className="mb-1 block text-xs font-medium text-gray-700">
+                <label className="node-label">
                     Source Language <span className="text-red-500">*</span>
                 </label>
                 <select
                     value={sourceLang}
                     onChange={(e) => setSourceLang(e.target.value)}
-                    className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-xs text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+                    className="node-input nodrag"
                 >
                     <option value="auto">Auto-detect</option>
                     <option value="en">English</option>
@@ -34,13 +34,13 @@ export const TranslatorNode = ({ id, data }) => {
 
             {/* Target Language */}
             <div>
-                <label className="mb-1 block text-xs font-medium text-gray-700">
+                <label className="node-label">
                     Target Language <span className="text-red-500">*</span>
                 </label>
                 <select
                     value={targetLang}
                     onChange={(e) => setTargetLang(e.target.value)}
-                    className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-xs text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+                    className="node-input nodrag"
                 >
                     <option value="en">English</option>
                     <option value="es">Spanish</option>

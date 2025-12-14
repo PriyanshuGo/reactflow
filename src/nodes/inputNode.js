@@ -16,38 +16,38 @@ export const InputNode = ({ id, data }) => {
   };
 
   return (
-    <div className="nowheel w-[280px] rounded-xl border border-indigo-200 bg-white shadow-sm">
+    <div className="node-container nowheel">
       {/* Header */}
-      <div className="rounded-t-xl border-b border-indigo-100 bg-indigo-50 px-3 py-2 flex items-center gap-2">
-        <FiDownload className="text-indigo-600" size={16} />
-        <span className="text-sm font-semibold text-indigo-900">Input</span>
+      <div className="node-header">
+        <FiDownload className="node-header-icon" size={16} />
+        <span className="node-header-text">Input</span>
       </div>
 
       {/* Body */}
-      <div className="px-3 py-3 space-y-3">
+      <div className="node-body node-body-spaced">
         {/* Name Field */}
         <div>
-          <label className="mb-1 block text-xs font-medium text-gray-700">
+          <label className="node-label">
             Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             value={currName}
             onChange={handleNameChange}
-            className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+            className="node-input nodrag"
             placeholder="input_name"
           />
         </div>
 
         {/* Type Field */}
         <div>
-          <label className="mb-1 block text-xs font-medium text-gray-700">
+          <label className="node-label">
             Type <span className="text-red-500">*</span>
           </label>
           <select
             value={inputType}
             onChange={handleTypeChange}
-            className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+            className="node-input nodrag"
           >
             <option value="Text">Text</option>
             <option value="File">File</option>
@@ -60,7 +60,7 @@ export const InputNode = ({ id, data }) => {
         type="source"
         position={Position.Right}
         id={`${id}-value`}
-        className="!h-2.5 !w-2.5 !border-0 !bg-indigo-400"
+        className="node-handle"
       />
     </div>
   );

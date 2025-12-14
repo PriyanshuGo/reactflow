@@ -14,13 +14,13 @@ export const SentimentNode = ({ id, data }) => {
         >
             {/* Display Mode */}
             <div>
-                <label className="mb-1 block text-xs font-medium text-gray-700">
+                <label className="node-label">
                     Display Mode <span className="text-red-500">*</span>
                 </label>
                 <select
                     value={displayMode}
                     onChange={(e) => setDisplayMode(e.target.value)}
-                    className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-xs text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+                    className="node-input nodrag"
                 >
                     <option value="label">Label Only</option>
                     <option value="score">Score Only</option>
@@ -35,9 +35,9 @@ export const SentimentNode = ({ id, data }) => {
                     id={`${id}-detailed`}
                     checked={detailed}
                     onChange={(e) => setDetailed(e.target.checked)}
-                    className="nodrag w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    className="node-checkbox nodrag"
                 />
-                <label htmlFor={`${id}-detailed`} className="text-xs font-medium text-gray-700">
+                <label htmlFor={`${id}-detailed`} className="text-xs font-medium text-gray-700 cursor-pointer">
                     Detailed Analysis
                 </label>
             </div>

@@ -14,13 +14,13 @@ export const PromptNode = ({ id, data }) => {
         >
             {/* Template Type */}
             <div>
-                <label className="mb-1 block text-xs font-medium text-gray-700">
+                <label className="node-label">
                     Template <span className="text-red-500">*</span>
                 </label>
                 <select
                     value={template}
                     onChange={(e) => setTemplate(e.target.value)}
-                    className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-xs text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+                    className="node-input nodrag"
                 >
                     <option value="instruction">Instruction</option>
                     <option value="qa">Question-Answer</option>
@@ -31,14 +31,14 @@ export const PromptNode = ({ id, data }) => {
 
             {/* Custom Instruction */}
             <div>
-                <label className="mb-1 block text-xs font-medium text-gray-700">
+                <label className="node-label">
                     Custom Instruction
                 </label>
                 <input
                     type="text"
                     value={customInstruction}
                     onChange={(e) => setCustomInstruction(e.target.value)}
-                    className="nodrag w-full rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-xs text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300"
+                    className="node-input nodrag"
                     placeholder="Add custom instructions..."
                 />
             </div>
