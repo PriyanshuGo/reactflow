@@ -1,10 +1,18 @@
 // promptNode.js
 import { useState } from 'react';
 import { BaseNode } from '../BaseNode';
+import { useStore } from '../store';
 
 export const PromptNode = ({ id, data }) => {
     const [template, setTemplate] = useState(data?.template || 'instruction');
     const [customInstruction, setCustomInstruction] = useState(data?.customInstruction || '');
+    const updateNodeField = useStore((state) => state.updateNodeField);
+    const [currName, setCurrName] = useState(data?.promptName || id.replace('prompt-', 'prompt_'));
+
+    const handleNameChange = (e) => {
+        setCurrName(e.target.value);
+        updateNodeField(id, 'promptName', e.target.value);
+    };
 
     return (
         <BaseNode
@@ -12,6 +20,18 @@ export const PromptNode = ({ id, data }) => {
             inputs={[{ id: `${id}-input` }]}
             outputs={[{ id: `${id}-prompt` }]}
         >
+            <div>
+                <label className="node-label">
+                    Name
+                </label>
+                <input
+                    type="text"
+                    value={currName}
+                    onChange={handleNameChange}
+                    className="node-input nodrag"
+                />
+            </div>
+            {/* Template Type */}
             {/* Template Type */}
             <div>
                 <label className="node-label">

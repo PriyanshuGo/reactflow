@@ -1,10 +1,18 @@
 // formatNode.js
 import { useState } from 'react';
 import { BaseNode } from '../BaseNode';
+import { useStore } from '../store';
 
 export const FormatNode = ({ id, data }) => {
     const [format, setFormat] = useState(data?.format || 'text');
     const [prettyPrint, setPrettyPrint] = useState(data?.prettyPrint || false);
+    const updateNodeField = useStore((state) => state.updateNodeField);
+    const [currName, setCurrName] = useState(data?.formatName || id.replace('format-', 'format_'));
+
+    const handleNameChange = (e) => {
+        setCurrName(e.target.value);
+        updateNodeField(id, 'formatName', e.target.value);
+    };
 
     return (
         <BaseNode
@@ -12,6 +20,18 @@ export const FormatNode = ({ id, data }) => {
             inputs={[{ id: `${id}-input` }]}
             outputs={[{ id: `${id}-output` }]}
         >
+            <div>
+                <label className="node-label">
+                    Name
+                </label>
+                <input
+                    type="text"
+                    value={currName}
+                    onChange={handleNameChange}
+                    className="node-input nodrag"
+                />
+            </div>
+            {/* Format Type */}
             {/* Format Type */}
             <div>
                 <label className="node-label">

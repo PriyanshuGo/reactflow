@@ -1,10 +1,18 @@
 // translatorNode.js
 import { useState } from 'react';
 import { BaseNode } from '../BaseNode';
+import { useStore } from '../store';
 
 export const TranslatorNode = ({ id, data }) => {
     const [sourceLang, setSourceLang] = useState(data?.sourceLang || 'auto');
     const [targetLang, setTargetLang] = useState(data?.targetLang || 'en');
+    const updateNodeField = useStore((state) => state.updateNodeField);
+    const [currName, setCurrName] = useState(data?.translatorName || id.replace('translator-', 'translator_'));
+
+    const handleNameChange = (e) => {
+        setCurrName(e.target.value);
+        updateNodeField(id, 'translatorName', e.target.value);
+    };
 
     return (
         <BaseNode
@@ -12,6 +20,18 @@ export const TranslatorNode = ({ id, data }) => {
             inputs={[{ id: `${id}-text` }]}
             outputs={[{ id: `${id}-translated` }]}
         >
+            <div>
+                <label className="node-label">
+                    Name
+                </label>
+                <input
+                    type="text"
+                    value={currName}
+                    onChange={handleNameChange}
+                    className="node-input nodrag"
+                />
+            </div>
+            {/* Source Language */}
             {/* Source Language */}
             <div>
                 <label className="node-label">

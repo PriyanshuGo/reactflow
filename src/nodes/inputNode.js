@@ -3,12 +3,16 @@ import { useState } from 'react';
 import { Handle, Position } from 'reactflow';
 import { FiDownload } from 'react-icons/fi';
 
+import { useStore } from '../store';
+
 export const InputNode = ({ id, data }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
   const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
   const [inputType, setInputType] = useState(data?.inputType || 'Text');
 
   const handleNameChange = (e) => {
     setCurrName(e.target.value);
+    updateNodeField(id, 'inputName', e.target.value);
   };
 
   const handleTypeChange = (e) => {

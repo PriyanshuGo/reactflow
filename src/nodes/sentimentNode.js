@@ -1,10 +1,18 @@
 // sentimentNode.js
 import { useState } from 'react';
 import { BaseNode } from '../BaseNode';
+import { useStore } from '../store';
 
 export const SentimentNode = ({ id, data }) => {
     const [detailed, setDetailed] = useState(data?.detailed || false);
     const [displayMode, setDisplayMode] = useState(data?.displayMode || 'both');
+    const updateNodeField = useStore((state) => state.updateNodeField);
+    const [currName, setCurrName] = useState(data?.sentimentName || id.replace('sentiment-', 'sentiment_'));
+
+    const handleNameChange = (e) => {
+        setCurrName(e.target.value);
+        updateNodeField(id, 'sentimentName', e.target.value);
+    };
 
     return (
         <BaseNode
@@ -12,6 +20,18 @@ export const SentimentNode = ({ id, data }) => {
             inputs={[{ id: `${id}-text` }]}
             outputs={[{ id: `${id}-result` }]}
         >
+            <div>
+                <label className="node-label">
+                    Name
+                </label>
+                <input
+                    type="text"
+                    value={currName}
+                    onChange={handleNameChange}
+                    className="node-input nodrag"
+                />
+            </div>
+            {/* Display Mode */}
             {/* Display Mode */}
             <div>
                 <label className="node-label">

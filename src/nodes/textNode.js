@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
+import { useStore } from "../store";
 
 export const TextNode = ({ id, data }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
+  const [currName, setCurrName] = useState(data?.textName || id.replace('text-', 'text_'));
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
   const [fontSize, setFontSize] = useState(12);
   const textareaRef = useRef(null);
@@ -48,10 +51,14 @@ export const TextNode = ({ id, data }) => {
     }
   };
 
-
+  const handleNameChange = (e) => {
+    setCurrName(e.target.value);
+    updateNodeField(id, 'textName', e.target.value);
+  };
 
   return (
     <div className="node-container nowheel">
+      {/* Header */}
       {/* Header */}
       <div className="node-header">
         <div className="node-header-text">
@@ -61,6 +68,16 @@ export const TextNode = ({ id, data }) => {
 
       {/* Body */}
       <div className="node-body">
+        <label className="node-label">
+          Name
+        </label>
+        <input
+          type="text"
+          value={currName}
+          onChange={handleNameChange}
+          className="node-input nodrag mb-3"
+        />
+
         <label className="node-label">
           Text <span className="text-red-500">*</span>
         </label>
