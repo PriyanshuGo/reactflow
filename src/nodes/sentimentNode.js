@@ -16,22 +16,13 @@ export const SentimentNode = ({ id, data }) => {
 
     return (
         <BaseNode
+            
             title="Sentiment Analysis"
+            name={currName}
+            onNameChange={handleNameChange}
             inputs={[{ id: `${id}-text` }]}
             outputs={[{ id: `${id}-result` }]}
         >
-            <div>
-                <label className="node-label">
-                    Name
-                </label>
-                <input
-                    type="text"
-                    value={currName}
-                    onChange={handleNameChange}
-                    className="node-input nodrag"
-                />
-            </div>
-            {/* Display Mode */}
             {/* Display Mode */}
             <div>
                 <label className="node-label">

@@ -16,22 +16,13 @@ export const FormatNode = ({ id, data }) => {
 
     return (
         <BaseNode
+            
             title="Format Output"
+            name={currName}
+            onNameChange={handleNameChange}
             inputs={[{ id: `${id}-input` }]}
             outputs={[{ id: `${id}-output` }]}
         >
-            <div>
-                <label className="node-label">
-                    Name
-                </label>
-                <input
-                    type="text"
-                    value={currName}
-                    onChange={handleNameChange}
-                    className="node-input nodrag"
-                />
-            </div>
-            {/* Format Type */}
             {/* Format Type */}
             <div>
                 <label className="node-label">

@@ -16,22 +16,13 @@ export const PromptNode = ({ id, data }) => {
 
     return (
         <BaseNode
+            
             title="Prompt Builder"
+            name={currName}
+            onNameChange={handleNameChange}
             inputs={[{ id: `${id}-input` }]}
             outputs={[{ id: `${id}-prompt` }]}
         >
-            <div>
-                <label className="node-label">
-                    Name
-                </label>
-                <input
-                    type="text"
-                    value={currName}
-                    onChange={handleNameChange}
-                    className="node-input nodrag"
-                />
-            </div>
-            {/* Template Type */}
             {/* Template Type */}
             <div>
                 <label className="node-label">

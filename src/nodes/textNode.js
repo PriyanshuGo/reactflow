@@ -6,11 +6,9 @@ import { BaseNode } from "../BaseNode";
 export const TextNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
   const nodes = useStore((state) => state.nodes);
-
   const edges = useStore(state => state.edges);
   const onEdgesChange = useStore(state => state.onEdgesChange);
   const onConnect = useStore(state => state.onConnect);
-
 
   const [currName, setCurrName] = useState(data?.textName || id.replace('text-', 'text_'));
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
@@ -97,65 +95,47 @@ export const TextNode = ({ id, data }) => {
   const inputs = variableHandles.map((handleId) => ({
     id: handleId,
     title: handleId,
-    className: invalidVars.includes(handleId) ? 'bg-red-500' : ''
+    style: invalidVars.includes(handleId) ? { backgroundColor: '#ef4444' } : {}
   }));
 
   const outputs = [{ id: `${id}-output` }];
 
-useEffect(() => {
-  const incomingEdges = edges.filter(
-    e => e.target === id
-  );
+  // Dynamic edge management based on variable handles
+  useEffect(() => {
+    const incomingEdges = edges.filter(e => e.target === id);
+    const currentVars = new Set(variableHandles);
 
-  const currentVars = new Set(variableHandles);
+    // Remove edges whose variable no longer exists
+    incomingEdges.forEach(edge => {
+      const varName = edge.targetHandle;
+      if (!currentVars.has(varName)) {
+        onEdgesChange([{ id: edge.id, type: 'remove' }]);
+      }
+    });
 
-  // 1️⃣ REMOVE edges whose variable no longer exists
-  incomingEdges.forEach(edge => {
-    const varName = edge.targetHandle;
-    if (!currentVars.has(varName)) {
-      onEdgesChange([
-        { id: edge.id, type: 'remove' }
-      ]);
-    }
-  });
-
-  // 2️⃣ ADD missing edges for new variables
-  variableHandles.forEach(varName => {
-    const exists = incomingEdges.some(
-      e => e.targetHandle === varName
-    );
-
-    if (!exists) {
-      onConnect({
-        source: varName,
-        sourceHandle: `${varName}-output`,
-        target: id,
-        targetHandle: varName,
-      });
-    }
-  });
-
-}, [variableHandles, edges, id]);
-
-
+    // Add missing edges for new variables
+    variableHandles.forEach(varName => {
+      const exists = incomingEdges.some(e => e.targetHandle === varName);
+      if (!exists) {
+        onConnect({
+          source: varName,
+          sourceHandle: `${varName}-output`,
+          target: id,
+          targetHandle: varName,
+        });
+      }
+    });
+  }, [variableHandles, edges, id]);
 
   return (
     <BaseNode
+      
       title="Text"
+      name={currName}
+      onNameChange={handleNameChange}
       inputs={inputs}
       outputs={outputs}
-      className="nowheel shadow-md"
     >
-      <label className="node-label">
-        Name
-      </label>
-      <input
-        type="text"
-        value={currName}
-        onChange={handleNameChange}
-        className="node-input nodrag mb-3"
-      />
-
       <label className="node-label">
         Text <span className="text-red-500">*</span>
       </label>

@@ -1,9 +1,9 @@
 // outputNode.js
 import { useState } from 'react';
-import { Handle, Position } from 'reactflow';
 import { FiUpload } from 'react-icons/fi';
 
 import { useStore } from '../store';
+import { BaseNode } from '../BaseNode';
 
 export const OutputNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
@@ -20,52 +20,28 @@ export const OutputNode = ({ id, data }) => {
   };
 
   return (
-    <div className="node-container nowheel">
-      {/* Header */}
-      <div className="node-header">
-        <FiUpload className="node-header-icon" size={16} />
-        <span className="node-header-text">Output</span>
+    <BaseNode
+      
+      title="Output"
+      icon={FiUpload}
+      name={currName}
+      onNameChange={handleNameChange}
+      inputs={[{ id: `${id}-value` }]}
+    >
+      {/* Type Field */}
+      <div>
+        <label className="node-label">
+          Type <span className="text-red-500">*</span>
+        </label>
+        <select
+          value={outputType}
+          onChange={handleTypeChange}
+          className="node-input nodrag"
+        >
+          <option value="Text">Text</option>
+          <option value="Image">Image</option>
+        </select>
       </div>
-
-      {/* Body */}
-      <div className="node-body node-body-spaced">
-        {/* Name Field */}
-        <div>
-          <label className="node-label">
-            Name <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            value={currName}
-            onChange={handleNameChange}
-            className="node-input nodrag"
-            placeholder="output_name"
-          />
-        </div>
-
-        {/* Type Field */}
-        <div>
-          <label className="node-label">
-            Type <span className="text-red-500">*</span>
-          </label>
-          <select
-            value={outputType}
-            onChange={handleTypeChange}
-            className="node-input nodrag"
-          >
-            <option value="Text">Text</option>
-            <option value="Image">Image</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Input Handle */}
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-value`}
-        className="node-handle"
-      />
-    </div>
+    </BaseNode>
   );
 };

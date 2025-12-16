@@ -16,22 +16,13 @@ export const SummarizerNode = ({ id, data }) => {
 
     return (
         <BaseNode
+            
             title="Summarizer"
+            name={currName}
+            onNameChange={handleNameChange}
             inputs={[{ id: `${id}-text` }]}
             outputs={[{ id: `${id}-summary` }]}
         >
-            <div>
-                <label className="node-label">
-                    Name
-                </label>
-                <input
-                    type="text"
-                    value={currName}
-                    onChange={handleNameChange}
-                    className="node-input nodrag"
-                />
-            </div>
-            {/* Summary Length */}
             {/* Summary Length */}
             <div>
                 <label className="node-label">

@@ -16,22 +16,13 @@ export const TranslatorNode = ({ id, data }) => {
 
     return (
         <BaseNode
+            
             title="Translator"
+            name={currName}
+            onNameChange={handleNameChange}
             inputs={[{ id: `${id}-text` }]}
             outputs={[{ id: `${id}-translated` }]}
         >
-            <div>
-                <label className="node-label">
-                    Name
-                </label>
-                <input
-                    type="text"
-                    value={currName}
-                    onChange={handleNameChange}
-                    className="node-input nodrag"
-                />
-            </div>
-            {/* Source Language */}
             {/* Source Language */}
             <div>
                 <label className="node-label">
