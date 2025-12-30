@@ -1,5 +1,5 @@
 // summarizerNode.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BaseNode } from '../BaseNode';
 import { useStore } from '../store';
 
@@ -7,16 +7,40 @@ export const SummarizerNode = ({ id, data }) => {
     const [length, setLength] = useState(data?.length || 'medium');
     const [maxWords, setMaxWords] = useState(data?.maxWords || '100');
     const updateNodeField = useStore((state) => state.updateNodeField);
-    const [currName, setCurrName] = useState(data?.summarizerName || id.replace('summarizer-', 'summarizer_'));
+    const DEBOUNCE_DELAY = 300;
+    const [currName, setCurrName] = useState(data?.name || id.replace('summarizer-', 'summarizer_'));
 
     const handleNameChange = (e) => {
         setCurrName(e.target.value);
-        updateNodeField(id, 'summarizerName', e.target.value);
     };
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'name', currName);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [currName, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'length', length);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [length, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'maxWords', maxWords);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [maxWords, id]);
 
     return (
         <BaseNode
-            
+
             title="Summarizer"
             name={currName}
             onNameChange={handleNameChange}

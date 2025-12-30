@@ -1,5 +1,5 @@
 // translatorNode.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BaseNode } from '../BaseNode';
 import { useStore } from '../store';
 
@@ -7,16 +7,40 @@ export const TranslatorNode = ({ id, data }) => {
     const [sourceLang, setSourceLang] = useState(data?.sourceLang || 'auto');
     const [targetLang, setTargetLang] = useState(data?.targetLang || 'en');
     const updateNodeField = useStore((state) => state.updateNodeField);
-    const [currName, setCurrName] = useState(data?.translatorName || id.replace('translator-', 'translator_'));
+    const DEBOUNCE_DELAY = 300;
+    const [currName, setCurrName] = useState(data?.name || id.replace('translator-', 'translator_'));
 
     const handleNameChange = (e) => {
         setCurrName(e.target.value);
-        updateNodeField(id, 'translatorName', e.target.value);
     };
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'name', currName);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [currName, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'sourceLang', sourceLang);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [sourceLang, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'targetLang', targetLang);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [targetLang, id]);
 
     return (
         <BaseNode
-            
+
             title="Translator"
             name={currName}
             onNameChange={handleNameChange}

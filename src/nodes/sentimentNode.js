@@ -1,5 +1,5 @@
 // sentimentNode.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BaseNode } from '../BaseNode';
 import { useStore } from '../store';
 
@@ -7,16 +7,40 @@ export const SentimentNode = ({ id, data }) => {
     const [detailed, setDetailed] = useState(data?.detailed || false);
     const [displayMode, setDisplayMode] = useState(data?.displayMode || 'both');
     const updateNodeField = useStore((state) => state.updateNodeField);
-    const [currName, setCurrName] = useState(data?.sentimentName || id.replace('sentiment-', 'sentiment_'));
+    const DEBOUNCE_DELAY = 300;
+    const [currName, setCurrName] = useState(data?.name || id.replace('sentiment-', 'sentiment_'));
 
     const handleNameChange = (e) => {
         setCurrName(e.target.value);
-        updateNodeField(id, 'sentimentName', e.target.value);
     };
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'name', currName);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [currName, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'detailed', detailed);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [detailed, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'displayMode', displayMode);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [displayMode, id]);
 
     return (
         <BaseNode
-            
+
             title="Sentiment Analysis"
             name={currName}
             onNameChange={handleNameChange}
