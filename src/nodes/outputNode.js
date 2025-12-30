@@ -1,5 +1,5 @@
 // outputNode.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FiUpload } from 'react-icons/fi';
 
 import { useStore } from '../store';
@@ -7,21 +7,37 @@ import { BaseNode } from '../BaseNode';
 
 export const OutputNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
-  const [currName, setCurrName] = useState(data?.outputName || id.replace('customOutput-', 'output_'));
+  const DEBOUNCE_DELAY = 300;
+  const [currName, setCurrName] = useState(data?.name || id.replace('customOutput-', 'output_'));
   const [outputType, setOutputType] = useState(data?.outputType || 'Text');
 
   const handleNameChange = (e) => {
     setCurrName(e.target.value);
-    updateNodeField(id, 'outputName', e.target.value);
   };
 
   const handleTypeChange = (e) => {
     setOutputType(e.target.value);
   };
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      updateNodeField(id, 'name', currName);
+    }, DEBOUNCE_DELAY);
+
+    return () => clearTimeout(timeout);
+  }, [currName, id]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      updateNodeField(id, 'outputType', outputType);
+    }, DEBOUNCE_DELAY);
+
+    return () => clearTimeout(timeout);
+  }, [outputType, id]);
+
   return (
     <BaseNode
-      
+
       title="Output"
       icon={FiUpload}
       name={currName}

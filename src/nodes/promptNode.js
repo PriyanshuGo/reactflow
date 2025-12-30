@@ -1,5 +1,5 @@
 // promptNode.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BaseNode } from '../BaseNode';
 import { useStore } from '../store';
 
@@ -7,16 +7,40 @@ export const PromptNode = ({ id, data }) => {
     const [template, setTemplate] = useState(data?.template || 'instruction');
     const [customInstruction, setCustomInstruction] = useState(data?.customInstruction || '');
     const updateNodeField = useStore((state) => state.updateNodeField);
-    const [currName, setCurrName] = useState(data?.promptName || id.replace('prompt-', 'prompt_'));
+    const DEBOUNCE_DELAY = 300;
+    const [currName, setCurrName] = useState(data?.name || id.replace('prompt-', 'prompt_'));
 
     const handleNameChange = (e) => {
         setCurrName(e.target.value);
-        updateNodeField(id, 'promptName', e.target.value);
     };
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'name', currName);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [currName, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'template', template);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [template, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'customInstruction', customInstruction);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [customInstruction, id]);
 
     return (
         <BaseNode
-            
+
             title="Prompt Builder"
             name={currName}
             onNameChange={handleNameChange}

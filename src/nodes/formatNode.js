@@ -1,5 +1,5 @@
 // formatNode.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BaseNode } from '../BaseNode';
 import { useStore } from '../store';
 
@@ -7,16 +7,40 @@ export const FormatNode = ({ id, data }) => {
     const [format, setFormat] = useState(data?.format || 'text');
     const [prettyPrint, setPrettyPrint] = useState(data?.prettyPrint || false);
     const updateNodeField = useStore((state) => state.updateNodeField);
-    const [currName, setCurrName] = useState(data?.formatName || id.replace('format-', 'format_'));
+    const DEBOUNCE_DELAY = 300;
+    const [currName, setCurrName] = useState(data?.name || id.replace('format-', 'format_'));
 
     const handleNameChange = (e) => {
         setCurrName(e.target.value);
-        updateNodeField(id, 'formatName', e.target.value);
     };
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'name', currName);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [currName, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'format', format);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [format, id]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            updateNodeField(id, 'prettyPrint', prettyPrint);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [prettyPrint, id]);
 
     return (
         <BaseNode
-            
+
             title="Format Output"
             name={currName}
             onNameChange={handleNameChange}

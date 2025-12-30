@@ -8,14 +8,13 @@ export const TextNode = ({ id, data }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
   const DEBOUNCE_DELAY = 300;
   const [currName, setCurrName] = useState(
-    data?.textName || id.replace("text-", "text_")
+    data?.name || id.replace("text-", "text_")
   );
-  const [currText, setCurrText] = useState("");
+  const [currText, setCurrText] = useState(data?.text || "");
 
   const handleNameChange = (e) => {
     setCurrName(e.target.value);
   };
-
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -27,7 +26,7 @@ export const TextNode = ({ id, data }) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      updateNodeField(id, "textName", currName);
+      updateNodeField(id, "name", currName);
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(timeout);
