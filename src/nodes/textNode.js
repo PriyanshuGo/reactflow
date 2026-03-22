@@ -22,7 +22,7 @@ export const TextNode = ({ id, data }) => {
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(timeout);
-  }, [currText, id]);
+  }, [currText, id, updateNodeField]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -30,7 +30,7 @@ export const TextNode = ({ id, data }) => {
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(timeout);
-  }, [currName, id]);
+  }, [currName, id, updateNodeField]);
 
   return (
     <BaseNode
