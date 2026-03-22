@@ -11,11 +11,7 @@ import {
 } from 'react-icons/fi';
 import {
   TbRobot,
-  TbMath,
-  TbClock,
-  TbBinaryTree
 } from 'react-icons/tb';
-import { BiDiamond } from 'react-icons/bi';
 
 export const PipelineToolbar = () => {
   return (

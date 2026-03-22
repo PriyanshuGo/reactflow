@@ -19,7 +19,7 @@ export const LLMNode = ({ id, data }) => {
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(timeout);
-  }, [currName, id]);
+  }, [currName, id ,updateNodeField]);
 
   return (
     <BaseNode

@@ -20,7 +20,7 @@ export const SummarizerNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [currName, id]);
+    }, [currName, id, updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -28,7 +28,7 @@ export const SummarizerNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [length, id]);
+    }, [length, id, updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -36,7 +36,7 @@ export const SummarizerNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [maxWords, id]);
+    }, [maxWords, id, updateNodeField]);
 
     return (
         <BaseNode

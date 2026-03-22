@@ -20,7 +20,7 @@ export const SentimentNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [currName, id]);
+    }, [currName, id , updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -28,7 +28,7 @@ export const SentimentNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [detailed, id]);
+    }, [detailed, id , updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -36,7 +36,7 @@ export const SentimentNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [displayMode, id]);
+    }, [displayMode, id , updateNodeField]);
 
     return (
         <BaseNode

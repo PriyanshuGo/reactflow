@@ -20,7 +20,7 @@ export const TranslatorNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [currName, id]);
+    }, [currName, id , updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -28,7 +28,7 @@ export const TranslatorNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [sourceLang, id]);
+    }, [sourceLang, id , updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -36,7 +36,7 @@ export const TranslatorNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [targetLang, id]);
+    }, [targetLang, id , updateNodeField]);
 
     return (
         <BaseNode

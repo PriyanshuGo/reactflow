@@ -20,7 +20,7 @@ export const FormatNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [currName, id]);
+    }, [currName, id, updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -28,7 +28,7 @@ export const FormatNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [format, id]);
+    }, [format, id, updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -36,7 +36,7 @@ export const FormatNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [prettyPrint, id]);
+    }, [prettyPrint, id, updateNodeField]);
 
     return (
         <BaseNode

@@ -20,7 +20,7 @@ export const PromptNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [currName, id]);
+    }, [currName, id, updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -28,7 +28,7 @@ export const PromptNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [template, id]);
+    }, [template, id, updateNodeField]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -36,7 +36,7 @@ export const PromptNode = ({ id, data }) => {
         }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(timeout);
-    }, [customInstruction, id]);
+    }, [customInstruction, id, updateNodeField]);
 
     return (
         <BaseNode

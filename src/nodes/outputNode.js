@@ -25,7 +25,7 @@ export const OutputNode = ({ id, data }) => {
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(timeout);
-  }, [currName, id]);
+  }, [currName, id, updateNodeField]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -33,7 +33,7 @@ export const OutputNode = ({ id, data }) => {
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(timeout);
-  }, [outputType, id]);
+  }, [outputType, id, updateNodeField]);
 
   return (
     <BaseNode
